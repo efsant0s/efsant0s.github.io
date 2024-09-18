@@ -34,7 +34,7 @@
             color: #000000;
         }
 
-        /* Style for the clickable div */
+        /* Base styles for the clickable div */
         .clickable-div {
             text-align: center;
             margin-top: 20px;
@@ -45,9 +45,18 @@
             line-height: 1.1;
             display: block;
             font-family: open sans, helvetica neue, Helvetica, Arial, sans-serif;
+            opacity: 0; /* Initially hidden */
+            transition: opacity 10s ease-in; /* Transition over 10 seconds */
         }
 
+        .clickable-div:hover {
+            background-color: #5a3d6b;
+        }
 
+        /* Class to trigger the fade-in */
+        .fade-in {
+            opacity: 1; /* Fully visible */
+        }
     </style>
 </head>
 
@@ -56,7 +65,7 @@
         <div id="howlongogogo_container"></div>
 
         <!-- New div for the 'Click me' text -->
-        <div id="clickme" class="clickable-div">Click me</div>
+        <div id="clickme" class="clickable-div" style="opacity: 1;">Click me</div>
 
         <p id="howlongagogo_p">Create your own countdown on <a href="https://howlongagogo.com">howlongagogo.com</a></p>
         <script>
@@ -83,14 +92,19 @@
         audio.play();
     }
 
-    // Function to create and show the new "I miss you" div
+    // Function to create and show the new "I miss you" div with fade-in
     function showMissYou() {
         var missYouDiv = document.createElement('div');
-        missYouDiv.className = 'clickable-div';
+        missYouDiv.className = 'clickable-div'; // Add the class for styling
         missYouDiv.innerHTML = 'I miss you';
 
         // Append the new div to the root container
         document.getElementById('root').appendChild(missYouDiv);
+
+        // Trigger the fade-in effect
+        setTimeout(function () {
+            missYouDiv.classList.add('fade-in');
+        }, 30); // Small delay to ensure the transition occurs after appending
     }
 
     // Add a click event listener to the 'click me' div
