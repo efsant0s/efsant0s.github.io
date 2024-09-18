@@ -9,27 +9,72 @@
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
 
+    <style>
+        /* Make the body fill the entire page and set the background color */
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            /* Align everything vertically */
+            background-color: #CCB5D6;
+        }
+
+        /* Center the countdown container */
+        #howlongogogo_container {
+            text-align: center;
+        }
+
+        /* Styling for the optional link */
+        #howlongagogo_p {
+            visibility: hidden;
+            text-align: center;
+            color: #000000;
+        }
+
+        /* Style for the clickable div */
+        .clickable-div {
+            text-align: center;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #CCB5D6;
+            font-size: 21px;
+            font-weight: 350;
+            line-height: 1.1;
+            display: block;
+            font-family: open sans, helvetica neue, Helvetica, Arial, sans-serif;
+        }
+
+
+    </style>
 </head>
 
 <body class="out-quart" hx-history="true" hx-boost="false">
     <div id="root" class="root mn--max tm--expanded-hd">
         <div id="howlongogogo_container"></div>
+
+        <!-- New div for the 'Click me' text -->
+        <div id="clickme" class="clickable-div">Click me</div>
+
         <p id="howlongagogo_p">Create your own countdown on <a href="https://howlongagogo.com">howlongagogo.com</a></p>
         <script>
             var howlongagogo_options = {
                 'date': '2024-10-26',
                 'time': '07:00',
                 'offset': '+01:00',
-                'name': '', 
+                'name': 'Time till I hug you and not let go',
                 'name_color': '000000',
-                'date_color': '666666',
-                'bg_color': 'ffffff',
+                'date_color': '745587',
+                'bg_color': 'CCB5D6',
                 'show_date': false,
             }
         </script>
         <script defer src="https://howlongagogo.com/js/widget.v2.js" id="howlongaogog_js"></script>
     </div>
 </body>
+
 <script>
     var audio = new Audio('music.mp3');
 
@@ -38,11 +83,21 @@
         audio.play();
     }
 
-    // Add a click event listener to the body of the page
-    document.body.addEventListener('click', function () {
+    // Function to create and show the new "I miss you" div
+    function showMissYou() {
+        var missYouDiv = document.createElement('div');
+        missYouDiv.className = 'clickable-div';
+        missYouDiv.innerHTML = 'I miss you';
+
+        // Append the new div to the root container
+        document.getElementById('root').appendChild(missYouDiv);
+    }
+
+    // Add a click event listener to the 'click me' div
+    document.getElementById('clickme').addEventListener('click', function () {
         playMusic();
-        // Optionally, you can remove the event listener after the music starts playing
-        document.body.removeEventListener('click', arguments.callee);
+        this.remove(); // Remove the 'Click me' div
+        showMissYou(); // Show the new 'I miss you' div
     });
 </script>
 
